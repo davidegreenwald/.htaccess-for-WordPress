@@ -1,5 +1,6 @@
 # ==============================================================================
 # Apache .htaccess Server Configuration for WordPress
+# @link https://github.com/davidegreenwald/.htaccess-for-WordPress
 #
 # If possible, this code should go in Apache's configuration files directly
 # (such as `httpd.conf`).
