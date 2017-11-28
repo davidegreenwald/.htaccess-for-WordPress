@@ -151,3 +151,26 @@ ExpiresByType font/woff                     "access plus 1 year"
 ExpiresByType application/font-woff2        "access plus 1 year"
 ExpiresByType font/woff2                    "access plus 1 year"
 </IfModule>
+
+
+# ==============================================================================
+## mod_headers for the Vary header
+# @link https://httpd.apache.org/docs/2.4/mod/mod_deflate.html
+#
+# The vary header tells compatible browsers to use gzip and sends unzipped
+# content if not
+#
+# Apache’s `mod_deflate` sends out the `Vary: Accept-Encoding` header
+# automatically and there should be no need to add the module separately
+#
+# Confirm your `vary` is working:
+# Chrome DevTools: Network > Response Headers > Vary
+# @link https://gtmetrix.com/
+#
+# Here is the code in case you need it
+#
+# <IfModule mod_headers.c>
+#  <FilesMatch ".(js|css|xml|gz|html)$">
+#    Header append Vary: Accept-Encoding
+#  </FilesMatch>
+# </IfModule>

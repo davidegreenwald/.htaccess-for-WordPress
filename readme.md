@@ -45,6 +45,17 @@ Be sure not to duplicate this code with a more complicated plugin if you add it 
 
 "Bust" the cache period by renaming the file.
 
+## The Vary header
+
+The `vary` header tells compatible browsers to use `gzip` and sends unzipped content if not.
+
+Apache’s `mod_deflate` sends out the `Vary: Accept-Encoding` header automatically and there should be no need to add the module separately.
+[Apache: mod_deflate](https://httpd.apache.org/docs/2.4/mod/mod_deflate.html)
+
+Confirm your `vary` is working:
+Chrome DevTools: Network > Response Headers > Vary
+[Gtmetrix.com](https://gtmetrix.com/)
+
 ## Still to come:
 
 `mod_deflate`, which your server hopefully has configured already.
