@@ -170,6 +170,8 @@ ExpiresByType font/woff2                    "access plus 1 year"
 # @link https://gtmetrix.com/
 # @link https://checkgzipcompression.com/
 #
+# Remove `mod_filter` for Apache versions before 2.4
+#
 # Setting up mod_deflate from scratch:
 # @link https://knackforge.com/blog/karalmax/how-enable-gzip-compression-apache
 

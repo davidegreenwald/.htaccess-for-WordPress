@@ -26,6 +26,8 @@ Included within:
 
 * Protect `wp-config.php` from HTTP access.
 
+* Close directory access (ex example.com/wp-content/uploads) with the `options` directive.
+
 ## SSL
 
 Enable HSTS HTTPS preload. Don't do this unless you have an SSL certificate and HTTPS working!
@@ -63,9 +65,5 @@ Apache’s `mod_deflate` sends out the `Vary: Accept-Encoding` header automatica
 [Apache: mod_deflate](https://httpd.apache.org/docs/2.4/mod/mod_deflate.html)
 
 Confirm your `vary` is working:
-Chrome DevTools: Network > Response Headers > Vary
-[Gtmetrix.com](https://gtmetrix.com/)
-
-## Still to come:
-
-`mod_deflate`, which your server hopefully has configured already.
+* Chrome DevTools: Network > Response Headers > Vary
+* [Gtmetrix.com](https://gtmetrix.com/)
