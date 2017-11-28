@@ -72,6 +72,12 @@ Require all denied
 Require all denied
 </Files>
 
+# Prevent directory access (i.e. example.com/wp-content/uploads/)
+# The `options` directive does not use a module and requires no if statement
+# @link https://httpd.apache.org/docs/2.4/mod/core.html#options
+
+Options -Indexes
+
 # ==============================================================================
 ## SSL
 
