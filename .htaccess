@@ -87,7 +87,9 @@ Require all denied
 # Tells users to keep static, unchanging resources like images and JavaScript
 # so they don't have to download them again on their next visit
 #
-# Test if your config is doing this already: gtmetrix.com
+# Test if your config is doing this already:
+# Chrome DevTools: Network > Response Headers > Cache-Control
+# @link https://gtmetrix.com/
 # Look for "Leverage browser caching"
 # If "expiration not specified," you can specify it here
 #
