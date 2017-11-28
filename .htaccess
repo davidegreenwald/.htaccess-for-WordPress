@@ -29,9 +29,10 @@
 # ==============================================================================
 # Table of Contents
 # WordPress `mod_rewrite`
-# WordPress Security
+# WordPress security
 # SSL
-# `mod_expires` For Cache
+# `mod_expires` for cache
+# `mod_deflate` for gzip
 
 # ==============================================================================
 ## Standard WordPress permalink rewrite for `.php` pages
@@ -52,10 +53,10 @@ RewriteRule . /index.php [L]
 
 # ==============================================================================
 ## Security
-#
+
 # This code is compatible with Apache 2.4
 # See the Apache docs for access control for 2.2
-# https://httpd.apache.org/docs/current/howto/auth.html
+# @link https://httpd.apache.org/docs/current/howto/auth.html
 
 # Disable `xmlrpc.php` to limit hacker login attempts
 # `xmlprc.php` is used for Jetpack, to blog by email, and pingbacks
@@ -81,7 +82,7 @@ Require all denied
 # Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
 
 # ==============================================================================
-## mod_expires For Cache
+## `mod_expires` for cache
 
 # Serve resources with far-future expires headers
 # Tells users to keep static, unchanging resources like images and JavaScript
@@ -89,6 +90,7 @@ Require all denied
 #
 # Test if your config is doing this already:
 # Chrome DevTools: Network > Response Headers > Cache-Control
+#
 # @link https://gtmetrix.com/
 # Look for "Leverage browser caching"
 # If "expiration not specified," you can specify it here
@@ -96,9 +98,9 @@ Require all denied
 # Can certainly be used in tandem with a cache plugin such as Cache Enabler
 # Be sure not to duplicate this code with a more complicated plugin
 #
-# Bust the cache by renaming the file, if need be
+# "Bust" the cache by renaming the file, if need be
 #
-# https://httpd.apache.org/docs/current/mod/mod_expires.html
+# @link https://httpd.apache.org/docs/current/mod/mod_expires.html
 
 <IfModule mod_expires.c>
 ExpiresActive On
