@@ -1,0 +1,150 @@
+# ==============================================================================
+# Apache .htaccess Server Configuration for WordPress
+#
+# If possible, this code should go in Apache's configuration files directly
+# (such as `httpd.conf`).
+#
+# However, on shared hosting or other limited-access servers, the `.htaccess`
+# file may be used instead to set these directives at the user level. It's
+# slower, but will accomplish the same results.
+#
+# WordPress will also automatically generate this file (with just `mod_rewrite`)
+# if it is not already present
+#
+# Certain plugins will write to `.htaccess` for cache, gzip, or redirection,
+# be sure to avoid duplicate or conflicting code.
+#
+# `<IfModule></IfModule>` works by checking for an Apache module, turning it on,
+# and listing your directives
+#
+# See also:
+# HTML5 Boilerplate
+# https://github.com/h5bp/html5-boilerplate/blob/master/dist/.htaccess
+#
+# Apache documentation
+# https://httpd.apache.org/docs/current/howto/htaccess.html
+# ==============================================================================
+
+# ==============================================================================
+# Table of Contents
+# WordPress `mod_rewrite`
+# WordPress Security
+# SSL
+# `mod_expires` For Cache
+
+# ==============================================================================
+## Standard WordPress permalink rewrite for `.php` pages
+
+# This will cause `example.com/index.php` to display as `example.com`
+# Don't touch this - WordPress will overwrite any additions
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+# ==============================================================================
+## Security
+#
+# This code is compatible with Apache 2.4
+# See the Apache docs for access control for 2.2
+# https://httpd.apache.org/docs/current/howto/auth.html
+
+# Disable `xmlrpc.php` to limit hacker login attempts
+# `xmlprc.php` is used for Jetpack, to blog by email, and pingbacks
+# If you're not doing any of this, disable it, it is a security hazard
+
+<Files xmlrpc.php>
+Require all denied
+</Files>
+
+# Protect `wp-config.php` from HTTP access
+
+<Files wp-config.php>
+Require all denied
+</Files>
+
+# ==============================================================================
+## SSL
+
+# Enable HSTS HTTPS preload
+# Don't do this unless you have an SSL certificate and HTTPS working!
+# Uncomment below to allow:
+
+# Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+
+# ==============================================================================
+## mod_expires For Cache
+
+# Serve resources with far-future expires headers
+# Tells users to keep static, unchanging resources like images and JavaScript
+# so they don't have to download them again on their next visit
+#
+# Test if your config is doing this already: gtmetrix.com
+# Look for "Leverage browser caching"
+# If "expiration not specified," you can specify it here
+#
+# Can certainly be used in tandem with a cache plugin such as Cache Enabler
+# Be sure not to duplicate this code with a more complicated plugin
+#
+# Bust the cache by renaming the file, if need be
+#
+# https://httpd.apache.org/docs/current/mod/mod_expires.html
+
+<IfModule mod_expires.c>
+ExpiresActive On
+
+# Set default for all files
+ExpiresDefault "access plus 7 days"
+
+# HTML
+# Modification is safer for dynamic pages but will generate a browser request
+ExpiresByType text/html "modification plus 1 month"
+
+# CSS
+ExpiresByType text/css "access plus 1 month"
+
+# JavaScript
+ExpiresByType application/javascript   "access plus 1 year"
+ExpiresByType application/x-javascript "access plus 1 year"
+ExpiresByType text/javascript          "access plus 1 year"
+
+# Media files
+ExpiresByType audio/ogg     "access plus 1 year"
+ExpiresByType image/bmp     "access plus 1 year"
+ExpiresByType image/gif     "access plus 1 year"
+ExpiresByType image/jpeg    "access plus 1 year"
+ExpiresByType image/png     "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+
+# Sometimes people change their `favicon.ico` file without renaming...
+# Feel free to cache for longer
+ExpiresByType image/ico     "access plus 1 week"
+
+ExpiresByType image/x-icon  "access plus 1 year"
+ExpiresByType image/webp    "access plus 1 year"
+ExpiresByType video/mp4     "access plus 1 year"
+ExpiresByType video/ogg     "access plus 1 year"
+ExpiresByType video/webm    "access plus 1 year"
+
+# Web fonts
+# This may be more than you need if you are woff-only
+ExpiresByType font/collection               "access plus 1 year"
+ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+ExpiresByType font/eot                      "access plus 1 year"
+ExpiresByType font/opentype                 "access plus 1 year"
+ExpiresByType font/otf                      "access plus 1 year"
+ExpiresByType application/x-font-ttf        "access plus 1 year"
+ExpiresByType font/ttf                      "access plus 1 year"
+ExpiresByType application/font-woff         "access plus 1 year"
+ExpiresByType application/x-font-woff       "access plus 1 year"
+ExpiresByType font/woff                     "access plus 1 year"
+ExpiresByType application/font-woff2        "access plus 1 year"
+ExpiresByType font/woff2                    "access plus 1 year"
+</IfModule>
