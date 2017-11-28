@@ -45,6 +45,16 @@ Be sure not to duplicate this code with a more complicated plugin if you add it 
 
 "Bust" the cache period by renaming the file.
 
+## `mod_deflate` for `gzip`
+
+`mod_deflate` compresses text-based assets (but not pre-compressed files such as .jpgs).
+
+Test if your config is doing this already, it probably is:
+* [gtmetrix.com](https://gtmetrix.com/)
+* [checkgzipcompression.com](https://checkgzipcompression.com/)
+
+[Knackforge.com: Setting up mod_deflate from scratch](https://knackforge.com/blog/karalmax/how-enable-gzip-compression-apache)
+
 ## The Vary header
 
 The `vary` header tells compatible browsers to use `gzip` and sends unzipped content if not.
